@@ -1,4 +1,4 @@
-update=Fri 07 Apr 2017 03:43:15 PM CDT
+update=Wed 17 May 2017 01:56:16 PM CDT
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,9 +25,19 @@ version=1
 NetIExt=net
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
 [eeschema]
 version=1
-LibDir=
+LibDir=../../Products
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -58,4 +68,4 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=/home/zach/Documents/NeuroTinker/Products/NeuroTinker_schematic_symbols
+LibName30=NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols

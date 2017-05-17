@@ -5,7 +5,7 @@
     (no_connects 0)
     (area 90.449999 71.449999 144.550001 90.550001)
     (thickness 1.6)
-    (drawings 19)
+    (drawings 18)
     (tracks 218)
     (zones 0)
     (modules 22)
@@ -1196,9 +1196,6 @@
       (xy -7.591295 4.14846) (xy -7.440725 4.13435) (xy -7.246827 4.148757)) (layer F.SilkS) (width 0.01))
   )
 
-  (gr_text POWER (at 91.9 81 270) (layer B.SilkS)
-    (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
-  )
   (gr_text ID (at 131.8 86.4) (layer B.SilkS)
     (effects (font (size 1.33 1.33) (thickness 0.19)) (justify mirror))
   )
