@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/zach/Documents/NeuroTinker/Products/NeuroBytes_Force_Sensor/HARDWARE/NeuroBytes_Force_Sensor.sch)
-    (date "Wed 17 May 2017 03:06:22 PM CDT")
+    (date "Thu 25 May 2017 05:20:02 PM CDT")
     (tool "Eeschema 4.0.5-e0-6337~49~ubuntu14.04.1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -395,12 +395,12 @@
   (libraries
     (library (logical device)
       (uri /usr/share/kicad/library/device.lib))
-    (library (logical NeuroTinker_schematic_symbols)
-      (uri /home/zach/Documents/NeuroTinker/Products/NeuroBytes_Force_Sensor/HARDWARE/NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols.lib))
     (library (logical conn)
       (uri /usr/share/kicad/library/conn.lib))
     (library (logical regul)
-      (uri /usr/share/kicad/library/regul.lib)))
+      (uri /usr/share/kicad/library/regul.lib))
+    (library (logical NeuroTinker_schematic_symbols)
+      (uri /home/zach/Documents/NeuroTinker/Products/NeuroBytes_Force_Sensor/HARDWARE/NeuroBytes_Schematic_Lib/NeuroTinker_schematic_symbols.lib)))
   (nets
     (net (code 1) (name SWDIO/SCK)
       (node (ref U1) (pin 21))
@@ -443,7 +443,7 @@
       (node (ref C1) (pin 2))
       (node (ref U1) (pin 16))
       (node (ref C2) (pin 2)))
-    (net (code 10) (name LED_G)
+    (net (code 10) (name LED_R)
       (node (ref U1) (pin 7))
       (node (ref RN1) (pin 2)))
     (net (code 11) (name IDENTIFY)
@@ -480,7 +480,7 @@
     (net (code 18) (name LED_B)
       (node (ref RN1) (pin 3))
       (node (ref U1) (pin 8)))
-    (net (code 19) (name LED_R)
+    (net (code 19) (name LED_G)
       (node (ref U1) (pin 6))
       (node (ref RN1) (pin 1)))
     (net (code 20) (name "Net-(Q1-Pad2)")

@@ -1,40 +1,38 @@
 #ifndef HAL_H_
 #define HAL_H_
 
-#define PORT_LED_FAST	GPIOA
-#define PIN_LED_FAST	GPIO5
-
-#define PORT_LED_SLOW	GPIOB
-#define PIN_LED_SLOW	GPIO3
-
-#define PORT_LED_FIRE	GPIOA
-#define PIN_LED_FIRE	GPIO2
-
-#define PORT_LIGHT_OUT	GPIOB
-#define PIN_LIGHT_OUT	GPIO1
-
-#define PORT_DARK_OUT	GPIOA
-#define PIN_DARK_OUT	GPIO4
-
-#define PORT_IDENTIFY	GPIOB
-#define PIN_IDENTIFY	GPIO7
-
-#define PORT_ADAPT		GPIOA
-#define PIN_ADAPT		GPIO3
+#define PORT_R_LED		GPIOA
+#define PORT_G_LED		GPIOA
+#define PORT_B_LED		GPIOA
+#define PIN_R_LED		GPIO1 //TIM2_CH2
+#define PIN_G_LED		GPIO0 //TIM2_CH1
+#define PIN_B_LED		GPIO2 //TIM2_CH3
 
 #define PORT_SENSE		GPIOA
-#define PIN_SENSE		GPIO1
+#define PIN_SENSE		GPIO3 //ADC_IN3
+
+#define PORT_IDENTIFY	GPIOA
+#define PIN_IDENTIFY	GPIO10
+
+#define PORT_AXON1_EX	GPIOA
+#define PORT_AXON1_IN	GPIOA
+#define PORT_AXON2_EX	GPIOA
+#define PORT_AXON2_IN	GPIOA
+
+#define PIN_AXON1_EX	GPIO5
+#define PIN_AXON1_IN	GPIO4
+#define PIN_AXON2_EX	GPIO7
+#define PIN_AXON2_IN	GPIO6
 
 extern volatile uint8_t tick;
+static const uint16_t gamma_lookup[1024];
 
 void systick_setup(int freq);
 void clock_setup(void);
 void gpio_setup(void);
 void tim_setup(void);
 void adc_setup(void);
-void setLED(uint8_t led, uint16_t val);
-uint8_t readButton(uint8_t button);
-int scale10bit(int val, int zero, int span);
-
+void LEDFullWhite(void);
+void setLED(uint16_t r, uint16_t g, uint16_t b);
 
 #endif

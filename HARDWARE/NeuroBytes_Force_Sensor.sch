@@ -109,9 +109,9 @@ Text GLabel 5400 2250 2    60   Input ~ 0
 NSS
 Text GLabel 2600 2550 0    60   Input ~ 0
 LED_B
-Text GLabel 2600 2400 0    60   Input ~ 0
-LED_G
 Text GLabel 2600 2250 0    60   Input ~ 0
+LED_G
+Text GLabel 2600 2400 0    60   Input ~ 0
 LED_R
 Text GLabel 5400 3450 2    60   Input ~ 0
 D1EX
@@ -165,9 +165,9 @@ Wire Wire Line
 	9300 2650 9500 2650
 Text GLabel 6750 2050 0    60   Input ~ 0
 LED_B
-Text GLabel 6750 1850 0    60   Input ~ 0
-LED_G
 Text GLabel 6750 1650 0    60   Input ~ 0
+LED_G
+Text GLabel 6750 1850 0    60   Input ~ 0
 LED_R
 Wire Wire Line
 	7650 2850 7750 2850

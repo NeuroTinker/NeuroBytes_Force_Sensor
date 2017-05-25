@@ -119,14 +119,10 @@ Wire Wire Line
 	6200 3300 6200 3850
 Wire Wire Line
 	5200 3450 5400 3450
-Text GLabel 5400 3000 2    60   Input ~ 0
+Text GLabel 2600 2850 0    60   Input ~ 0
 A1IN
-Text GLabel 5400 2850 2    60   Input ~ 0
+Text GLabel 2600 3000 0    60   Input ~ 0
 A1EX
-Wire Wire Line
-	5200 3000 5400 3000
-Wire Wire Line
-	5200 2850 5400 2850
 Wire Wire Line
 	5200 2700 5400 2700
 Wire Wire Line
@@ -748,14 +744,10 @@ Text GLabel 3800 5450 0    60   Input ~ 0
 A2IN
 Text GLabel 3800 5650 0    60   Input ~ 0
 A2EX
-Text GLabel 5400 1950 2    60   Input ~ 0
+Text GLabel 2600 3300 0    60   Input ~ 0
 A2EX
-Wire Wire Line
-	5400 1950 5200 1950
-Text GLabel 5400 2100 2    60   Input ~ 0
+Text GLabel 2600 3150 0    60   Input ~ 0
 A2IN
-Wire Wire Line
-	5400 2100 5200 2100
 Wire Wire Line
 	2650 6850 2000 6850
 Connection ~ 2000 6850
@@ -827,4 +819,12 @@ Wire Wire Line
 	8750 2050 8750 2250
 Wire Wire Line
 	2600 2700 2800 2700
+Wire Wire Line
+	2600 2850 2800 2850
+Wire Wire Line
+	2800 3000 2600 3000
+Wire Wire Line
+	2600 3150 2800 3150
+Wire Wire Line
+	2800 3300 2600 3300
 $EndSCHEMATC

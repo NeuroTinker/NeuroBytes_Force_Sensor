@@ -2,7 +2,7 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 #include <libopencm3/stm32/adc.h>
-#include <libopencm3/cm3/nvic.h>
+//#include <libopencm3/cm3/nvic.h>
 #include <libopencm3/cm3/systick.h>
 
 #include "HAL.h"
@@ -10,6 +10,160 @@
 volatile uint8_t tick = 0;
 
 uint8_t channel_array[] =  {1, 1, 1};
+
+
+void sys_tick_handler(void)
+{
+	tick = 1;
+}
+
+void systick_setup(int freq) 
+{
+	systick_set_clocksource(STK_CSR_CLKSOURCE_AHB);
+	STK_CVR = 0;
+// STM32F0 command:	systick_set_reload(rcc_ahb_frequency / freq);
+	systick_counter_enable();
+	systick_interrupt_enable();
+}
+
+void clock_setup(void)
+{
+	/*	Set clock source to 16 MHz High-Speed Internal oscillator and turn it on */
+	rcc_set_sysclk_source(RCC_HSI16);
+	rcc_osc_on(RCC_HSI16);
+}
+
+void gpio_setup(void)
+{
+	/*	Enable GPIO clocks */
+	rcc_periph_clock_enable(RCC_GPIOA);
+	rcc_periph_clock_enable(RCC_GPIOB);
+	rcc_periph_clock_enable(RCC_GPIOC);
+
+	/*	Set up LED pins:
+		Alternative Function Mode with no pullup/pulldown
+		Output options: push-pull, high speed
+		PIN_R_LED (PA1): AF2, TIM2_CH2
+		PIN_G_LED (PA0): AF2, TIM2_CH1
+		PIN_B_LED (PA2): AF2, TIM2_CH3 */
+	gpio_mode_setup(PORT_R_LED, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_R_LED);
+	gpio_mode_setup(PORT_G_LED, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_G_LED);
+	gpio_mode_setup(PORT_B_LED, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_B_LED);
+	gpio_set_output_options(PORT_R_LED, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, PIN_R_LED);
+	gpio_set_output_options(PORT_G_LED, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, PIN_G_LED);
+	gpio_set_output_options(PORT_B_LED, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, PIN_B_LED);
+	gpio_set_af(PORT_R_LED, GPIO_AF2, PIN_R_LED);
+	gpio_set_af(PORT_G_LED, GPIO_AF2, PIN_G_LED);
+	gpio_set_af(PORT_B_LED, GPIO_AF2, PIN_B_LED);
+
+	/*	Set up ADC input */
+	gpio_mode_setup(PORT_SENSE, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, PIN_SENSE);
+
+	/*	Set up button inputs */
+	gpio_mode_setup(PORT_IDENTIFY, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, PIN_IDENTIFY);
+}
+
+void tim_setup(void)
+{
+	/* 	Enable and reset TIM2 clock */
+	rcc_periph_clock_enable(RCC_TIM2);
+	timer_reset(TIM2);
+
+	/* 	Set up TIM2 mode to no clock divider ratio, edge alignment, and up direction */
+	timer_set_mode(TIM2, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_EDGE, TIM_CR1_DIR_UP);
+
+	/*	Set prescaler to 0: 48 MHz clock */
+	timer_set_prescaler(TIM2, 0);
+
+	/* 	Set timer period to 9600: 5 kHz PWM with 9600 steps */
+	timer_set_period(TIM2, 9600);
+
+	/* 	Set TIM2 Output Compare mode to PWM1 on channels 1,2, and 3 */ 
+	timer_set_oc_mode(TIM2, TIM_OC1, TIM_OCM_PWM1);
+	timer_set_oc_mode(TIM2, TIM_OC2, TIM_OCM_PWM1);
+	timer_set_oc_mode(TIM2, TIM_OC3, TIM_OCM_PWM1);
+
+	/* 	Set starting output compare values */
+	timer_set_oc_value(TIM2, TIM_OC1, 0);
+	timer_set_oc_value(TIM2, TIM_OC2, 0);
+	timer_set_oc_value(TIM2, TIM_OC3, 0);
+
+	/* 	Enable outputs */ 
+	timer_enable_oc_output(TIM2, TIM_OC1);
+	timer_enable_oc_output(TIM2, TIM_OC2);
+	timer_enable_oc_output(TIM2, TIM_OC3);
+	
+	/*	Enable counter */
+	timer_enable_counter(TIM2);
+}
+
+void adc_setup(void)
+{
+	/*	Force sensor is on PA3 (ADC_IN3) */
+	
+	int i;
+
+	/*	Enable ADC clock */
+	rcc_periph_clock_enable(RCC_ADC1);
+
+	/*	Make sure ADC is off during config! */
+	adc_power_off(ADC1);
+
+	/*	ADC config */
+		
+	adc_set_single_conversion_mode(ADC1);
+	adc_set_right_aligned(ADC1);
+	adc_calibrate(ADC1);
+	adc_set_resolution(ADC1, ADC_CFGR1_RES_12_BIT);
+
+	/*	adc_set_regular_sequence(adc, length, channel[]) isn't working, so this snippit
+		_should_ set up channel 3. */	
+	MMIO32((ADC1) + 0x28) |= 1 << 3;
+
+	/*	Turn on ADC and wait a bit */
+	adc_power_on(ADC1);
+	for (i=0;i<800000;i++)
+	{
+		__asm__("nop");
+	}
+}
+
+void LEDFullWhite(void) 
+{
+	timer_set_oc_value(TIM2, TIM_OC1, 9600);
+	timer_set_oc_value(TIM2, TIM_OC2, 9600);
+	timer_set_oc_value(TIM2, TIM_OC3, 9600);
+}
+
+void setLED(uint16_t r, uint16_t g, uint16_t b)
+{
+	if (r <= 1023) 
+	{
+		timer_set_oc_value(TIM2, TIM_OC2, gamma_lookup[r]);
+	}
+	else 
+	{
+		timer_set_oc_value(TIM2, TIM_OC2, 9600);
+	}
+
+	if (g <= 1023) 
+	{
+		timer_set_oc_value(TIM2, TIM_OC1, gamma_lookup[g]);
+	}
+	else
+	{
+		timer_set_oc_value(TIM2, TIM_OC1, 9600);
+	}
+
+	if (b <= 1023)
+	{
+		timer_set_oc_value(TIM2, TIM_OC3, gamma_lookup[b]);
+	}
+	else
+	{
+		timer_set_oc_value(TIM2, TIM_OC3, 9600);
+	}
+}
 
 static const uint16_t gamma_lookup[1024] = {
 	/*	Gamma = 2, input range = 0-1023, output range = 0-9600 */
@@ -78,168 +232,3 @@ static const uint16_t gamma_lookup[1024] = {
   9027,9045,9063,9082,9100,9118,9137,9155,9173,9192,9210,9228,9247,9265,9284,9302,
   9321,9339,9358,9376,9395,9413,9432,9450,9469,9488,9506,9525,9544,9563,9581,9600 };
 
-void sys_tick_handler(void)
-{
-	tick = 1;
-}
-
-void systick_setup(int freq) 
-{
-	systick_set_clocksource(STK_CSR_CLKSOURCE_AHB);
-	STK_CVR = 0;
-// STM32F0 command:	systick_set_reload(rcc_ahb_frequency / freq);
-	systick_counter_enable();
-	systick_interrupt_enable();
-}
-
-void clock_setup(void)
-{
-	/*	Set clock source to 16 MHz High-Speed Internal oscillator and turn it on */
-	rcc_set_sysclk_source(RCC_HSI16);
-	rcc_osc_on(RCC_HSI16);
-}
-
-void gpio_setup(void)
-{
-	/*	Enable GPIO clocks */
-	rcc_periph_clock_enable(RCC_GPIOA);
-	rcc_periph_clock_enable(RCC_GPIOB);
-	rcc_periph_clock_enable(RCC_GPIOC);
-
-	/*	Set up LED pins:
-		Alternative Function Mode with no pullup/pulldown
-		Output options: push-pull, high speed
-		PIN_LED_FAST (PA5): AF5, TIM2_CH1
-		PIN_LED_SLOW (PB3): AF2, TIM2_CH2
-		PIN_LED_FIRE (PA2): AF2, TIM2_CH3 */
-	gpio_mode_setup(PORT_LED_FAST, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_LED_FAST);
-	gpio_mode_setup(PORT_LED_SLOW, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_LED_SLOW);
-	gpio_mode_setup(PORT_LED_FIRE, GPIO_MODE_AF, GPIO_PUPD_NONE, PIN_LED_FIRE);
-	gpio_set_output_options(PORT_LED_FAST, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, PIN_LED_FAST);
-	gpio_set_output_options(PORT_LED_SLOW, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, PIN_LED_SLOW);
-	gpio_set_output_options(PORT_LED_FIRE, GPIO_OTYPE_PP, GPIO_OSPEED_HIGH, PIN_LED_FIRE);
-	gpio_set_af(PORT_LED_FAST, GPIO_AF5, PIN_LED_FAST);
-	gpio_set_af(PORT_LED_SLOW, GPIO_AF2, PIN_LED_SLOW);
-	gpio_set_af(PORT_LED_FIRE, GPIO_AF2, PIN_LED_FIRE);
-
-	/*	Set up ADC input */
-	gpio_mode_setup(PORT_SENSE, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, PIN_SENSE);
-
-	/*	Set up button inputs */
-	gpio_mode_setup(PORT_IDENTIFY, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, PIN_IDENTIFY);
-	gpio_mode_setup(PORT_ADAPT, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, PIN_ADAPT);
-}
-
-void tim_setup(void)
-{
-	/* 	Enable and reset TIM2 clock */
-	rcc_periph_clock_enable(RCC_TIM2);
-	timer_reset(TIM2);
-
-	/* 	Set up TIM2 mode to no clock divider ratio, edge alignment, and up direction */
-	timer_set_mode(TIM2, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_EDGE, TIM_CR1_DIR_UP);
-
-	/*	Set prescaler to 0: 48 MHz clock */
-	timer_set_prescaler(TIM2, 0);
-
-	/* 	Set timer period to 9600: 5 kHz PWM with 9600 steps */
-	timer_set_period(TIM2, 9600);
-
-	/* 	Set TIM2 Output Compare mode to PWM1 on channels 1,2, and 3 */ 
-	timer_set_oc_mode(TIM2, TIM_OC1, TIM_OCM_PWM1);
-	timer_set_oc_mode(TIM2, TIM_OC2, TIM_OCM_PWM1);
-	timer_set_oc_mode(TIM2, TIM_OC3, TIM_OCM_PWM1);
-
-	/* 	Set starting output compare values */
-	timer_set_oc_value(TIM2, TIM_OC1, 0);
-	timer_set_oc_value(TIM2, TIM_OC2, 0);
-	timer_set_oc_value(TIM2, TIM_OC3, 0);
-
-	/* 	Enable outputs */ 
-	timer_enable_oc_output(TIM2, TIM_OC1);
-	timer_enable_oc_output(TIM2, TIM_OC2);
-	timer_enable_oc_output(TIM2, TIM_OC3);
-	
-	/*	Enable counter */
-	timer_enable_counter(TIM2);
-}
-
-void adc_setup(void)
-{
-	/*	Light sensor is on PA1 (ADC1) */
-	
-	int i;
-
-	/*	Enable ADC clock */
-	rcc_periph_clock_enable(RCC_ADC1);
-
-	/*	Make sure ADC is off during config! */
-	adc_power_off(ADC1);
-
-	/*	ADC config */
-		
-	adc_set_single_conversion_mode(ADC1);
-	adc_set_right_aligned(ADC1);
-	adc_calibrate(ADC1);
-	adc_set_resolution(ADC1, ADC_CFGR1_RES_12_BIT);
-
-	/*	adc_set_regular_sequence(adc, length, channel[]) isn't working, so this snippit
-		_should_ set up channel 1. */	
-	MMIO32((ADC1) + 0x28) |= 1 << 1;
-
-	/*	Turn on ADC and wait a bit */
-	adc_power_on(ADC1);
-	for (i=0;i<800000;i++)
-	{
-		__asm__("nop");
-	}
-}
-
-void setLED(uint8_t led, uint16_t val) 
-{
-	/*	Set LED: 0 for 'fast', 1 for 'slow', 2 for 'fire' */
-	if (val <= 1023) 
-	{
-		if (led == 0) 
-		{
-			timer_set_oc_value(TIM2, TIM_OC1, gamma_lookup[val]);
-		}
-		if (led == 1)
-		{
-			timer_set_oc_value(TIM2, TIM_OC2, gamma_lookup[val]);
-		}
-		if (led == 2)
-		{
-			timer_set_oc_value(TIM2, TIM_OC3, gamma_lookup[val]);
-		}	
-	}
-	else 
-	{
-		if (led == 0) 
-		{
-			timer_set_oc_value(TIM2, TIM_OC1, 9600);
-		}
-		if (led == 1)
-		{
-			timer_set_oc_value(TIM2, TIM_OC2, 9600);
-		}
-		if (led == 2)
-		{
-			timer_set_oc_value(TIM2, TIM_OC3, 9600);
-		}	
-	}
-}
-
-uint8_t readButton(uint8_t button)
-{
-	/* 	Reads current button state: 0 for 'identify', 1 for 'adaptation rate'. Returns state (1 = high). */
-	switch(button)
-	{
-		case 0:
-			return (gpio_get(PORT_IDENTIFY, PIN_IDENTIFY) > 0);
-			break;
-		case 1:
-			return (gpio_get(PORT_ADAPT, PIN_ADAPT) > 0);
-			break;	
-	}
-}

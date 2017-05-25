@@ -2,7 +2,7 @@
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
 #include <libopencm3/stm32/adc.h>
-#include <libopencm3/cm3/nvic.h>
+//#include <libopencm3/cm3/nvic.h>
 #include <libopencm3/cm3/systick.h>
 
 #include "HAL.h"
@@ -53,22 +53,9 @@ int main(void)
 		adc_start_conversion_regular(ADC1);
 		while (!(adc_eoc(ADC1)));
 		temp = adc_read_regular(ADC1);
-
-		if (readButton(0) > 0)
-		{
-			zero = temp;
-		}
-
-		if (readButton(1) > 0)
-		{
-			span = temp;
-		}
-
 		output = scale10bit(temp, zero, span);
 		
-		setLED(0, 1023 - output);
-		setLED(1, output);
-		setLED(2, 100);
+		setLED(output,output,output);
 
 		prev = temp;
 
