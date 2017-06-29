@@ -1,12 +1,8 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/timer.h>
-<<<<<<< HEAD
 #include <libopencm3/stm32/adc.h>
-//#include <libopencm3/cm3/nvic.h>
-=======
 #include <libopencm3/cm3/nvic.h>
->>>>>>> a443fac2d081c7f31d32bba888a6cb8e538ad706
 #include <libopencm3/cm3/systick.h>
 #include <libopencm3/stm32/exti.h>
 
@@ -29,8 +25,8 @@ int	adaptation_rate = 0;
 	int	sense_input;
 	int	sense_10_bit;
 	int	current_sense;
-	int	zero = 1; // 165 circle
-	int	span = 200; // 3000 circle
+	int	zero = 0; // 165 circle
+	int	span = 10000; // 3000 circle
 	int	fire_time = 0;
 	int	fire_led = 0;
 	int	zero_freq = 150;
@@ -87,28 +83,21 @@ int main(void)
 	tim_setup();
 	gpio_setup();
 	adc_setup();
-	//exti_select_source(EXTI3, GPIOB);
 	setLED(200,0,0);
-	//systick_setup(100000);
 
 	//	MMIO32(SYSCFG_BASE + 0x0c) = 0b1111 << 12;
 
 	
 	for(;;)
 	{
-<<<<<<< HEAD
+		/*
 		adc_start_conversion_regular(ADC1);
 		while (!(adc_eoc(ADC1)));
-		temp = adc_read_regular(ADC1);
-		output = scale10bit(temp, zero, span);
+		sense_input = adc_read_regular(ADC1);
+		sense_10_bit = scale10bit(sense_input, zero, span);
 		
-		setLED(output,output,output);
-=======
-		//if (exti_get_flag_status(PIN_DEND5_EX) != 0) setLED(0,200,200);
-		//gpio_set(PORT_AXON_OUT, PIN_AXON_OUT);
-		//if (gpio_get(PORT_DEND5_EX, PIN_DEND5_EX) != 0) setLED(0,200,200);
-		//setLED(0,0,10);
-		//LEDFullWhite();
+	setLED(sense_10_bit,sense_10_bit,sense_10_bit);
+	*/
 		if (main_tick == 1){
 			// 5 ms
 			//setLED(200,0,200);
@@ -139,7 +128,9 @@ int main(void)
 				downstream_write_buffer_ready = 1;
 			}
 			*/
-
+			//MMIO32((ADC1) + 0x28) |= 1 << 3;
+			adc_start_conversion_regular(ADC1);
+			while (!(adc_eoc(ADC1)));
 			sense_input = adc_read_regular(ADC1);
 			sense_10_bit = scale10bit(sense_input, zero, span);
 			adaptation_rate = 0;
@@ -171,7 +162,7 @@ int main(void)
 				send_ping_time = 0;
 			}
 
-			button_status = gpio_get(PORT_ADAPT, PIN_ADAPT);
+			button_status = gpio_get(PORT_IDENTIFY, PIN_IDENTIFY);
 			button_status >>= 3;
 			button_status &= 0b1;
 			if (identify_time > 0){
@@ -209,9 +200,22 @@ int main(void)
 					addWrite(NID_BUFF,message);
 				}
 			}
-			
->>>>>>> a443fac2d081c7f31d32bba888a6cb8e538ad706
+			neuron.leaky_current = sense_10_bit;
+			membraneDecayStep(&neuron);
+			neuron.potential = 0;
+			neuron.potential += neuron.fire_potential;
+			neuron.fire_potential += neuron.leaky_current;
 
+			// if membrane potential is greater than threshold, fire
+			if (neuron.potential > MEMBRANE_THRESHOLD){
+				// fire for determined pulse width
+				neuron.state = FIRE;
+				neuron.fire_potential = HYPERPOLARIZATION;
+				neuron.fire_time = PULSE_LENGTH;
+				// send downstream pulse
+				addWrite(DOWNSTREAM_BUFF, PULSE_MESSAGE);
+			}
+			
 			if (blink_flag != 0){
 				setLED(200,0,300);
 				blink_time = 1;
@@ -221,32 +225,29 @@ int main(void)
 					setLED(200,0,0);
 					blink_time = 0;
 				}
-			} else {
-				if (fire_time > 0){
-					fire_time -= 1;
+			}else if (neuron.state == FIRE){
+				neuron.fire_time -= 1;
+				if (neuron.fire_time == 0){
+					neuron.state = INTEGRATE;
+				}
+				LEDFullWhite();
+			} else if (neuron.state == INTEGRATE){
+				if (neuron.potential > 10000){
+					setLED(200,0,0);
+				} else if (neuron.potential > 0){
+					setLED(neuron.potential / 50, 200 - (neuron.potential / 50), 0);
+				} else if (neuron.potential < -10000){
+					setLED(0,0, 200);
+				} else if (neuron.potential < 0){
+					setLED(0, 200 + (neuron.potential / 50), -1 * neuron.potential / 50);
 				} else{
-					fire_time = (-1 * current_sense / 5) + zero_freq;
-					//fire_time = zero_freq;
-					addWrite(DOWNSTREAM_BUFF, PULSE_MESSAGE);
-				}
-
-				if (fire_time >= 1 && fire_time <= 5){
-					fire_led = 200;
-				} else {
-					fire_led = 0;
-				}
-
-				if (current_sense == 0){
-					setLED(0, fire_led, 0);
-				} else if(current_sense > 0){
-					setLED(current_sense / 5, fire_led, 0);
-				} else if (current_sense < 0){
-					setLED(0, fire_led, -1 * current_sense / 5);
+					setLED(0,200,0);
 				}
 			}
 			//setLED(100,100,100);
-
-			adc_start_conversion_regular(ADC1);
+			//setLED(sense_10_bit, 0 , 0);
+			//adc_start_conversion_regular(ADC1);
+			//MMIO32((ADC1) + 0x28) |= 1 << 3;
 		}
 	}
 }

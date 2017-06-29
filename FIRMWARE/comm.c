@@ -4,85 +4,46 @@
 
 write_buffer_t write_buffer;
 
-uint32_t message_buffer[11] = {0,0,0,0,0,0,0,0,0,0,0};
-uint8_t message_buffer_count[11];
+uint32_t message_buffer[2] = {0,0};
+uint8_t message_buffer_count[2];
 
-extern volatile uint16_t active_input_pins[11] = {0,0,0,0,0,0,0,0,0,0,0};
+volatile uint16_t active_input_pins[2] = {0,0};
 
-extern volatile uint16_t active_output_pins[11] = {PIN_AXON_OUT,0,0,0,0,0,0,0,0,0,0};
+volatile uint16_t active_output_pins[2] = {PIN_AXON1_EX,PIN_AXON2_EX};
 
-extern volatile uint32_t dendrite_pulses[5] = {0,0,0,0,0};
-extern volatile uint8_t dendrite_pulse_count = 0;
+volatile uint8_t blink_flag = 0;
 
-extern volatile uint8_t blink_flag = 0;
+volatile uint32_t nid_ping_time = 0;
 
-extern volatile uint32_t nid_ping_time = 0;
-
-extern volatile uint16_t nid_pin = 0;
+volatile uint16_t nid_pin = 0;
 uint32_t nid_port = 0;
-extern volatile uint16_t nid_pin_out = 0;
+volatile uint16_t nid_pin_out = 0;
 uint32_t nid_port_out = 0;
 uint8_t nid_i      =    4;
-extern volatile uint32_t  nid_keep_alive = NID_PING_KEEP_ALIVE;
+volatile uint32_t  nid_keep_alive = NID_PING_KEEP_ALIVE;
 
 
 /* 
 All available input pins are
     = {
-        PIN_AXON_IN,
-        PIN_DEND1_EX,
-        PIN_DEND1_IN, 
-        PIN_DEND2_EX,
-        PIN_DEND2_IN,
-        PIN_DEND3_EX,
-        PIN_DEND3_IN,
-        PIN_DEND4_EX,
-        PIN_DEND4_IN,
-        PIN_DEND5_EX,
-        PIN_DEND5_IN
+        PIN_AXON1_IN,
+        PIN_AXON2_IN
     };
 */
 
-extern uint32_t active_input_ports[11] = {
-    PORT_AXON_IN,
-    PORT_DEND1_EX,
-    PORT_DEND1_IN,
-    PORT_DEND2_EX,
-    PORT_DEND2_IN,
-    PORT_DEND3_EX,
-    PORT_DEND3_IN,
-    PORT_DEND4_EX,
-    PORT_DEND4_IN,
-    PORT_DEND5_EX,
-    PORT_DEND5_IN
+extern uint32_t active_input_ports[2] = {
+    PORT_AXON1_IN,
+    PORT_AXON2_IN
 };
 
-extern uint32_t active_output_ports[11] = {
-    PORT_AXON_OUT,
-    PORT_DEND1_EX,
-    PORT_DEND1_IN,
-    PORT_DEND2_EX,
-    PORT_DEND2_IN,
-    PORT_DEND3_EX,
-    PORT_DEND3_IN,
-    PORT_DEND4_EX,
-    PORT_DEND4_IN,
-    PORT_DEND5_EX,
-    PORT_DEND5_IN
+extern uint32_t active_output_ports[2] = {
+    PORT_AXON1_IN,
+    PORT_AXON2_IN
 };
 
-extern uint16_t complimentary_pins[11] = {
-    0,
-    PIN_DEND1_IN,
-    PIN_DEND1_EX,
-    PIN_DEND2_IN,
-    PIN_DEND2_EX,
-    PIN_DEND3_IN,
-    PIN_DEND3_EX,
-    PIN_DEND4_IN,
-    PIN_DEND4_EX,
-    PIN_DEND5_IN,
-    PIN_DEND5_EX
+extern uint16_t complimentary_pins[2] = {
+    PIN_AXON1_EX,
+    PIN_AXON2_EX
 };
 
 // complimentary port is same port
@@ -93,8 +54,6 @@ extern volatile uint32_t all_write_buffer = 0;
 extern volatile uint8_t all_write_buffer_ready = 0;
 extern volatile uint32_t nid_write_buffer = 0;
 extern volatile uint8_t nid_write_buffer_ready = 0;
-extern volatile uint8_t dendrite_pulse_flag[11] = {0,0,0,0,0,0,0,0,0,0,0};
-extern volatile uint8_t dendrite_ping_flag[11] = {0,0,0,0,0,0,0,0,0,0,0};
 uint8_t write_count = 0;
 extern volatile uint16_t identify_time = 0;
 extern uint8_t identify_channel = 0;
@@ -167,16 +126,6 @@ void readInputs(void)
                 } else if (header == PING){
                     if (recipient_id == DOWNSTREAM){
                         // receive upstream keep-alive
-                        dendrite_ping_flag[i] = 1;
-                        if (i % 2 != 0){
-                            // excitatory
-                            setAsOutput(active_input_ports[i+1], complimentary_pins[i]);
-                            active_output_pins[i+1] = complimentary_pins[i];
-                        } else{
-                            // inhibitory
-                            setAsOutput(active_input_ports[i-1], complimentary_pins[i]);
-                            active_output_pins[i-1] = complimentary_pins[i];
-                        }
                     } else if (recipient_id == ALL){
                         // receive NID keep-alive
                         /*
@@ -205,8 +154,6 @@ void readInputs(void)
                             setAsOutput(nid_port_out, nid_pin_out);
                         }
                     }
-                } else if (header == PULSE){
-                    dendrite_pulse_flag[i] = 1;
                 } else if (header == IDENTIFY){
                     if (identify_time == 0){
                         identify_time = IDENTIFY_TIME;
@@ -318,9 +265,11 @@ void writeDownstream(void)
 
     // we should have both axon out pins be on the same port that way they can be written together
     if (value != 0){
-        gpio_set(PORT_AXON_OUT, PIN_AXON_OUT);
+        gpio_set(PORT_AXON1_EX, PIN_AXON1_EX);
+        gpio_set(PORT_AXON2_EX, PIN_AXON2_EX);
     }else{
-        gpio_clear(PORT_AXON_OUT, PIN_AXON_OUT);
+        gpio_clear(PORT_AXON1_EX, PIN_AXON1_EX);
+        gpio_clear(PORT_AXON2_EX, PIN_AXON2_EX);
     }
 }
 
@@ -331,8 +280,10 @@ void writeAll(void)
     uint32_t value;
     value = write_buffer.all[0] & 0x80000000;
     write_buffer.all[0] <<= 1;
-    active_output_ports[0] = PORT_AXON_OUT;
-    active_output_pins[0] = PIN_AXON_OUT;
+    active_output_ports[0] = PORT_AXON1_EX;
+    active_output_ports[0] = PORT_AXON1_EX;
+    active_output_pins[1] = PIN_AXON2_EX;
+    active_output_pins[1] = PIN_AXON2_EX;
     for (i=0;i<11;i++){
         if (active_output_pins[i] != 0){
             if (value != 0){

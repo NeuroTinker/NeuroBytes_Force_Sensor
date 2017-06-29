@@ -3,13 +3,15 @@
 
 #include "comm.h"
 
-#define MEMBRANE_THRESHOLD      140
-#define HYPERPOLARIZATION		-140
-#define DENDRITE_COUNT          5
+
+#define MEMBRANE_THRESHOLD      10000
+#define HYPERPOLARIZATION		-15000
+#define DENDRITE_COUNT          4
 #define PULSE_LENGTH            5 // led white time
 
 #define DENDRITE_ALIVE_TIME     200
 #define FIRE_LED_TIME           5
+#define FIRE_DELAY_TIME         20
 
 //typedef enum gpio_pins gpio_pin;
 //typedef enum gpio_ports gpio_port;
@@ -71,6 +73,8 @@ int16_t		fire_potential;
 uint16_t	hebb_time;
 uint8_t		time_multiple;
 uint16_t	ms_count;
+
+uint16_t    leaky_current;
 
 } neuron_t;
 
