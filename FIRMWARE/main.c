@@ -100,35 +100,8 @@ int main(void)
 	*/
 		if (main_tick == 1){
 			// 5 ms
-			//setLED(200,0,200);
 			main_tick = 0;
-			//gpio_toggle(PORT_AXON_OUT, PIN_AXON_OUT);
-			//downstream_write_buffer = 0b01010101010101010101010101010101;
-			//downstream_write_buffer_ready = 1;
-			/*
-			if (++wait_time == 10){
-				downstream_write_buffer = BLINK_MESSAGE;
-				downstream_write_buffer_ready = 1;
-				wait_time = 0;
-			}
-			*/
-			
-			/*
-			if (++wait_time == DATA_TIME){
-				wait_time = 0;
-				message_data = MMIO32(SYSCFG_BASE + 0x08);
-				nid_write_buffer = DATA_MESSAGE | message_data;
-				nid_write_buffer_ready = 1;
-			}
-			*/
-			/*
-			if (++wait_time == 50){
-				wait_time = 0;
-				downstream_write_buffer = PULSE_MESSAGE;
-				downstream_write_buffer_ready = 1;
-			}
-			*/
-			//MMIO32((ADC1) + 0x28) |= 1 << 3;
+
 			adc_start_conversion_regular(ADC1);
 			while (!(adc_eoc(ADC1)));
 			sense_input = adc_read_regular(ADC1);
@@ -162,14 +135,15 @@ int main(void)
 				send_ping_time = 0;
 			}
 
-			button_status = gpio_get(PORT_IDENTIFY, PIN_IDENTIFY);
-			button_status >>= 3;
-			button_status &= 0b1;
 			if (identify_time > 0){
 				identify_time -= 1;
 			}
+
+			button_status = gpio_get(PORT_IDENTIFY, PIN_IDENTIFY);
+			button_status >>= 3;
+			button_status &= 0b1;
+
 			if (button_status == 0){ // !=
-				//setLED(200,200,200);
 				if (button_press_time++ >= BUTTON_PRESS_TIME){
 					button_armed = 1;
 					button_press_time = 0;
@@ -195,12 +169,11 @@ int main(void)
 			if (nid_channel != 0){
 				if (data_time++ > DATA_TIME){
 					data_time = 0;
-					//message = DATA_MESSAGE | (nid_channel << 19) | (uint16_t) neuron.potential | (nid_keep_alive << 22);
 					message = DATA_MESSAGE | (uint16_t) current_sense | (nid_channel << 19) | (nid_keep_alive << 22);
 					addWrite(NID_BUFF,message);
 				}
 			}
-			neuron.leaky_current = sense_10_bit;
+			neuron.leaky_current = sense_10_bit * 11 / 10;
 			membraneDecayStep(&neuron);
 			neuron.potential = 0;
 			neuron.potential += neuron.fire_potential;
@@ -244,10 +217,6 @@ int main(void)
 					setLED(0,200,0);
 				}
 			}
-			//setLED(100,100,100);
-			//setLED(sense_10_bit, 0 , 0);
-			//adc_start_conversion_regular(ADC1);
-			//MMIO32((ADC1) + 0x28) |= 1 << 3;
 		}
 	}
 }
