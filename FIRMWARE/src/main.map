@@ -73,7 +73,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 main.o
  .data          0x0000000000000000        0x0 main.o
  .bss           0x0000000000000000        0x0 main.o
- .fingerprint   0x0000000000000000        0xc main.o
  .bss.fire_time
                 0x0000000000000000        0x4 main.o
  .data.zero_freq
@@ -1083,6 +1082,11 @@ END GROUP
                 0x00000000200000a4                . = ALIGN (0x4)
                 0x00000000200000a4                end = .
                 0x0000000020000800                PROVIDE (_stack, (ORIGIN (ram) + LENGTH (ram)))
+                0x0000000008002000                _fingerprint_start = 0x8002000
+
+.fingerprint    0x0000000008002000        0xc
+ *(.fingerprint)
+ .fingerprint   0x0000000008002000        0xc main.o
 OUTPUT(main.elf elf32-littlearm)
 
 .debug_info     0x0000000000000000     0x5305
