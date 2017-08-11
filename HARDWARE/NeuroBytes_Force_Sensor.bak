@@ -92,26 +92,20 @@ RESET
 Wire Wire Line
 	1650 1950 2800 1950
 Text GLabel 5400 2400 2    60   Input ~ 0
-SWCLK/MISO
+SWCLK
 Wire Wire Line
 	6200 3150 6200 1050
 Wire Wire Line
 	5400 2400 5200 2400
 Text GLabel 5400 2550 2    60   Input ~ 0
-SWDIO/SCK
+SWDIO
 Wire Wire Line
 	5400 2550 5200 2550
-Text GLabel 5400 1800 2    60   Input ~ 0
-MOSI
-Wire Wire Line
-	5200 1800 5400 1800
-Text GLabel 5400 2250 2    60   Input ~ 0
-NSS
 Text GLabel 2600 2550 0    60   Input ~ 0
 LED_B
-Text GLabel 2600 2400 0    60   Input ~ 0
-LED_G
 Text GLabel 2600 2250 0    60   Input ~ 0
+LED_G
+Text GLabel 2600 2400 0    60   Input ~ 0
 LED_R
 Text GLabel 5400 3450 2    60   Input ~ 0
 D1EX
@@ -125,8 +119,6 @@ Text GLabel 2600 3000 0    60   Input ~ 0
 A1EX
 Wire Wire Line
 	5200 2700 5400 2700
-Wire Wire Line
-	5200 2250 5400 2250
 $Comp
 L LED_RABG D1
 U 1 1 58B4B5D1
@@ -165,9 +157,9 @@ Wire Wire Line
 	9300 2650 9500 2650
 Text GLabel 6750 2050 0    60   Input ~ 0
 LED_B
-Text GLabel 6750 1850 0    60   Input ~ 0
-LED_G
 Text GLabel 6750 1650 0    60   Input ~ 0
+LED_G
+Text GLabel 6750 1850 0    60   Input ~ 0
 LED_R
 Wire Wire Line
 	7650 2850 7750 2850
@@ -449,19 +441,6 @@ Wire Wire Line
 	6750 3550 7050 3550
 Connection ~ 7050 3550
 $Comp
-L CONN_01X07 P12
-U 1 1 58B5DF5E
-P 10500 4950
-F 0 "P12" H 10500 5350 50  0000 C CNN
-F 1 "CONN_01X07" V 10600 4950 50  0000 C CNN
-F 2 "KiCad_Footprints:ZF_CONN_JST_GH_7POS" H 10500 4550 50  0000 C CNN
-F 3 "" H 10500 4950 50  0000 C CNN
-F 4 "No" H 10500 4950 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 10500 4950 60  0001 C CNN "RoHS"
-	1    10500 4950
-	1    0    0    -1  
-$EndComp
-$Comp
 L GND #PWR013
 U 1 1 58B5E0E3
 P 10050 5700
@@ -487,34 +466,14 @@ F 3 "" H 9850 4150 50  0000 C CNN
 	1    9850 4150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	9850 4150 9850 5250
-Wire Wire Line
-	9850 5250 10300 5250
 Text GLabel 9250 4750 0    60   Input ~ 0
 RESET
 Wire Wire Line
 	9250 4750 10300 4750
 Text GLabel 9250 5150 0    60   Input ~ 0
-SWCLK/MISO
+SWCLK
 Text GLabel 9250 4950 0    60   Input ~ 0
-SWDIO/SCK
-Text GLabel 9250 5350 0    60   Input ~ 0
-NSS
-Text GLabel 9250 5550 0    60   Input ~ 0
-MOSI
-Wire Wire Line
-	9250 5550 9650 5550
-Wire Wire Line
-	9650 5550 9650 5150
-Wire Wire Line
-	9650 5150 10300 5150
-Wire Wire Line
-	9250 5350 9550 5350
-Wire Wire Line
-	9550 5350 9550 5050
-Wire Wire Line
-	9550 5050 10300 5050
+SWDIO
 Wire Wire Line
 	9250 5150 9450 5150
 Wire Wire Line
@@ -827,4 +786,19 @@ Wire Wire Line
 	2600 3150 2800 3150
 Wire Wire Line
 	2800 3300 2600 3300
+Wire Wire Line
+	10300 5050 9850 5050
+Wire Wire Line
+	9850 5050 9850 4150
+$Comp
+L CONN_01X05 P1
+U 1 1 598E106F
+P 10500 4850
+F 0 "P1" H 10500 5150 50  0000 C CNN
+F 1 "JST_GH_5-pos" V 10600 4850 50  0000 C CNN
+F 2 "" H 10500 4850 50  0000 C CNN
+F 3 "" H 10500 4850 50  0000 C CNN
+	1    10500 4850
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
