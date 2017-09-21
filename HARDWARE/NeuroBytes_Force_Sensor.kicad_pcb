@@ -1,12 +1,19 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.5-e0-6337~49~ubuntu14.04.1)
+(kicad_pcb (version 4) (host pcbnew 4.0.7-e1-6374~58~ubuntu14.04.1)
 
   (general
     (links 75)
     (no_connects 0)
+<<<<<<< HEAD
     (area 90.449999 71.449999 144.550001 90.550001)
     (thickness 1.6)
     (drawings 19)
     (tracks 217)
+=======
+    (area 86.9 62.899999 148.299752 94.049752)
+    (thickness 1.6)
+    (drawings 19)
+    (tracks 220)
+>>>>>>> development
     (zones 0)
     (modules 22)
     (nets 44)
@@ -45,7 +52,7 @@
   )
 
   (setup
-    (last_trace_width 1)
+    (last_trace_width 0.2)
     (user_trace_width 0.5)
     (user_trace_width 1)
     (trace_clearance 0.2)
@@ -1226,7 +1233,11 @@
     (effects (font (size 1 1) (thickness 0.15)))
   )
   (gr_line (start 126.5 63) (end 126.5 91) (layer Cmts.User) (width 0.2))
+<<<<<<< HEAD
   (gr_text "FORCE SENSORY NEURON" (at 121.4 87.6) (layer F.SilkS)
+=======
+  (gr_text "PRESSURE SENSORY NEURON" (at 121.4 87.6) (layer F.SilkS)
+>>>>>>> development
     (effects (font (size 1 1) (thickness 0.14) italic))
   )
   (gr_text NeuroBytes (at 121.4 85.6) (layer F.Mask)
@@ -1378,6 +1389,7 @@
   (segment (start 114.2 77.95) (end 116.9 75.25) (width 0.2) (layer B.Cu) (net 18))
   (segment (start 116.9 75.25) (end 117.75 75.25) (width 0.2) (layer B.Cu) (net 18))
   (segment (start 117.75 75.25) (end 118.35 75.25) (width 0.2) (layer B.Cu) (net 18))
+<<<<<<< HEAD
   (segment (start 130.8 88.6) (end 130.5 88.6) (width 0.2) (layer B.Cu) (net 19))
   (segment (start 130.5 88.6) (end 129.65 87.75) (width 0.2) (layer B.Cu) (net 19))
   (segment (start 127.1 89.992596) (end 127.207404 89.992596) (width 0.2) (layer F.Cu) (net 19))
@@ -1387,6 +1399,20 @@
   (segment (start 129.407404 89.992596) (end 130.8 88.6) (width 0.2) (layer F.Cu) (net 19))
   (segment (start 110.7 85.4) (end 110.7 87.3) (width 0.2) (layer F.Cu) (net 19))
   (segment (start 110.7 87.3) (end 113.392596 89.992596) (width 0.2) (layer F.Cu) (net 19))
+=======
+  (segment (start 113.392596 89.992596) (end 113.6 89.992596) (width 0.2) (layer F.Cu) (net 19))
+  (segment (start 113.6 89.992596) (end 127.1 89.992596) (width 0.2) (layer F.Cu) (net 19))
+  (segment (start 110 88.2) (end 111.792596 89.992596) (width 0.2) (layer F.Cu) (net 19))
+  (segment (start 111.792596 89.992596) (end 113.6 89.992596) (width 0.2) (layer F.Cu) (net 19))
+  (segment (start 110 86.1) (end 110 88.2) (width 0.2) (layer F.Cu) (net 19))
+  (segment (start 110.7 85.4) (end 110 86.1) (width 0.2) (layer F.Cu) (net 19))
+  (segment (start 130.8 88.6) (end 130.5 88.6) (width 0.2) (layer B.Cu) (net 19))
+  (segment (start 130.5 88.6) (end 129.65 87.75) (width 0.2) (layer B.Cu) (net 19))
+  (segment (start 127.1 89.992596) (end 127.207404 89.992596) (width 0.2) (layer F.Cu) (net 19))
+  (via (at 130.8 88.6) (size 0.6) (drill 0.4) (layers F.Cu B.Cu) (net 19))
+  (segment (start 127.1 89.992596) (end 129.407404 89.992596) (width 0.2) (layer F.Cu) (net 19))
+  (segment (start 129.407404 89.992596) (end 130.8 88.6) (width 0.2) (layer F.Cu) (net 19))
+>>>>>>> development
   (segment (start 111.2 84.2) (end 110.7 84.7) (width 0.2) (layer B.Cu) (net 19))
   (segment (start 110.7 84.7) (end 110.7 85.4) (width 0.2) (layer B.Cu) (net 19))
   (segment (start 112.05 84.2) (end 111.2 84.2) (width 0.2) (layer B.Cu) (net 19))

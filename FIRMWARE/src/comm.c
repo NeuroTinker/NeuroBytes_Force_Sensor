@@ -258,6 +258,7 @@ void write()
 void writeDownstream(void)
 {
     uint32_t value;
+    uint32_t i;
     //value = downstream_write_buffer | 0b1;
     //value = (downstream_write_buffer >> 31) | 0b1;
     value = write_buffer.downstream[0] & 0x80000000;
@@ -266,9 +267,15 @@ void writeDownstream(void)
     // we should have both axon out pins be on the same port that way they can be written together
     if (value != 0){
         gpio_set(PORT_AXON1_EX, PIN_AXON1_EX);
+        for (i=0; i<100; i++){
+            __asm__("NOP");
+        }
         gpio_set(PORT_AXON2_EX, PIN_AXON2_EX);
     }else{
         gpio_clear(PORT_AXON1_EX, PIN_AXON1_EX);
+        for (i=0; i<100; i++){
+            __asm__("NOP");
+        }
         gpio_clear(PORT_AXON2_EX, PIN_AXON2_EX);
     }
 }
