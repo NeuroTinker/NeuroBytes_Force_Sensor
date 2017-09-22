@@ -136,19 +136,6 @@ Wire Wire Line
 	10400 1500 10400 2450
 Wire Wire Line
 	10400 2450 9900 2450
-$Comp
-L NPN_dual Q2
-U 1 1 58B4BE96
-P 8000 2550
-F 0 "Q2" H 7975 2550 50  0000 L CNN
-F 1 "NPN_dual" V 7800 2750 50  0000 L CNN
-F 2 "KiCad_Footprints:ZF_SMD_SOT-363" V 8450 2900 50  0000 C CNN
-F 3 "" H 8000 2550 50  0000 C CNN
-F 4 "No" H 8000 2550 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 8000 2550 60  0001 C CNN "RoHS"
-	1    8000 2550
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	9300 2250 9500 2250
 Wire Wire Line
@@ -161,24 +148,6 @@ Text GLabel 6750 1650 0    60   Input ~ 0
 LED_G
 Text GLabel 6750 1850 0    60   Input ~ 0
 LED_R
-Wire Wire Line
-	7650 2850 7750 2850
-$Comp
-L GND #PWR03
-U 1 1 58B4C48D
-P 7650 3250
-F 0 "#PWR03" H 7650 3000 50  0001 C CNN
-F 1 "GND" H 7650 3100 50  0000 C CNN
-F 2 "" H 7650 3250 50  0000 C CNN
-F 3 "" H 7650 3250 50  0000 C CNN
-	1    7650 3250
-	1    0    0    -1  
-$EndComp
-Connection ~ 7650 2850
-Wire Wire Line
-	8250 2850 8600 2850
-Wire Wire Line
-	8600 2850 8600 2650
 Wire Wire Line
 	8600 2650 9000 2650
 $Comp
@@ -538,25 +507,6 @@ F 5 "Yes" H 9150 2650 60  0001 C CNN "RoHS"
 	1    9150 2650
 	0    1    1    0   
 $EndComp
-$Comp
-L NPN_dual Q1
-U 1 1 58B5E1EC
-P 8000 1750
-F 0 "Q1" H 7975 1750 50  0000 L CNN
-F 1 "NPN_dual" V 7800 1950 50  0000 L CNN
-F 2 "KiCad_Footprints:ZF_SMD_SOT-363" V 7550 2100 50  0000 C CNN
-F 3 "" H 8000 1750 50  0000 C CNN
-F 4 "No" H 8000 1750 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 8000 1750 60  0001 C CNN "RoHS"
-	1    8000 1750
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	7650 1650 7650 3250
-Wire Wire Line
-	7650 2050 7750 2050
-Wire Wire Line
-	8600 1650 8600 2450
 Wire Wire Line
 	2000 1000 2000 2100
 Wire Wire Line
@@ -646,9 +596,6 @@ F 3 "" H 1300 5000 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7750 1650 7650 1650
-Connection ~ 7650 2050
-Wire Wire Line
 	8750 2250 9000 2250
 Wire Wire Line
 	8600 2450 9000 2450
@@ -725,57 +672,16 @@ F 5 "Yes" H 2000 6450 60  0001 C CNN "RoHS"
 $EndComp
 Wire Wire Line
 	2000 6300 2000 5900
-$Comp
-L R_Pack04 RN1
-U 1 1 591CCB32
-P 7200 1950
-F 0 "RN1" V 6900 1950 50  0000 C CNN
-F 1 "R_Pack04" V 7400 1950 50  0000 C CNN
-F 2 "KiCad_Footprints:ZF_RN_4iso_CTS-0804" V 7475 1950 50  0001 C CNN
-F 3 "" H 7200 1950 50  0000 C CNN
-F 4 "No" H 7200 1950 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 7200 1950 60  0001 C CNN "RoHS"
-	1    7200 1950
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	6750 1650 6900 1650
 Wire Wire Line
-	6900 1650 6900 1750
-Wire Wire Line
-	6900 1750 7000 1750
-Wire Wire Line
 	6750 2050 6900 2050
-Wire Wire Line
-	6900 2050 6900 1950
-Wire Wire Line
-	6900 1950 7000 1950
-Wire Wire Line
-	7400 1850 7750 1850
-Wire Wire Line
-	7400 1750 7500 1750
-Wire Wire Line
-	7500 1750 7500 1450
-Wire Wire Line
-	7500 1450 7750 1450
-Wire Wire Line
-	7750 2650 7500 2650
-Wire Wire Line
-	7500 2650 7500 1950
-Wire Wire Line
-	7500 1950 7400 1950
 Wire Wire Line
 	2600 2250 2800 2250
 Wire Wire Line
 	2600 2550 2800 2550
 Wire Wire Line
 	2600 2400 2800 2400
-Wire Wire Line
-	8600 1650 8250 1650
-Wire Wire Line
-	8250 2050 8750 2050
-Wire Wire Line
-	8750 2050 8750 2250
 Wire Wire Line
 	2600 2700 2800 2700
 Wire Wire Line
@@ -796,8 +702,10 @@ U 1 1 598E106F
 P 10500 4850
 F 0 "P1" H 10500 5150 50  0000 C CNN
 F 1 "JST_GH_5-pos" V 10600 4850 50  0000 C CNN
-F 2 "" H 10500 4850 50  0000 C CNN
+F 2 "KiCad_Footprints:ZF_CONN_JST_GH_5POS" H 10600 4500 50  0000 C CNN
 F 3 "" H 10500 4850 50  0000 C CNN
+F 4 "No" H 10500 4850 60  0001 C CNN "Subs Allowed"
+F 5 "Yes" H 10500 4850 60  0001 C CNN "RoHS"
 	1    10500 4850
 	1    0    0    -1  
 $EndComp
