@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.7-e1-6374~58~ubuntu14.04.1)
+(kicad_pcb (version 4) (host pcbnew 4.0.7-e2-6376~58~ubuntu14.04.1)
 
   (general
     (links 75)
     (no_connects 0)
-    (area 46.899999 59.8 189.100001 140.375)
+    (area 46.899999 59.8 189.100001 153.625)
     (thickness 1.6)
     (drawings 46)
     (tracks 211)
@@ -12,13 +12,15 @@
     (nets 39)
   )
 
-  (page A4)
+  (page B)
   (title_block
     (title "NeuroBytes Force Sensor")
-    (date 2017-05-17)
-    (rev B)
+    (date 2017-10-03)
+    (rev C)
     (company "NeuroTinker, LLC")
-    (comment 1 "License: GPL v3")
+    (comment 1 "(C) 2017 Zach Fredin")
+    (comment 2 "Drawing No. ZF-11782")
+    (comment 3 "License: CC-BY-SA 4.0")
   )
 
   (layers
@@ -98,7 +100,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory ../../../NeuroTinker_RFQ_Sept2017/NeuroBytes_Force_Sensor/))
+      (outputdirectory /home/zach/Desktop/))
   )
 
   (net 0 "")
@@ -1276,7 +1278,7 @@
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (target plus (at 90 91) (size 5) (width 0.1) (layer Edge.Cuts))
-  (gr_text "NOTES:\n1. FOOTPRINTS ORIENTED PER IPC-7351FC LEVEL B (PIN 1 IN LOWER LEFT)\n2. COMPONENT ROTATION IN DEGREES COUNTER-CLOCKWISE\n3. ALL COMPONENTS BESIDES FSR MOUNTED ON B.CU LAYER (LED IS BOTTOM-MOUNT)\n4. PCB IS 1.6mm FR4 RATED FOR ROHS REFLOW, 1OZ COPPER, ENIG FINISH\n5. MATTE BLACK SOLDER MASK WITH WHITE SILKSCREEN\n6. SOLDER PASTE MUST BE ROHS COMPLIANT (LEAD-FREE)\n7. NO MARKS (E-TEST, QA, SERIAL NUMBER, ETC) ON FRONT (LOGO SIDE) OF BOARD\n8. BOARDS TO BE SHIPPED IN CUSTOMER-SUPPLIED FOAM TRAYS\n9. 3MM LED HOLE IS PLATED\n10. FORCE SENSITIVE RESISTOR ADHERED TO BOARD FRONT USING BUILT IN STICKY PAD\n11. FORCE SENSITIVE RESISTOR MUST BE HAND SOLDERED" (at 78 125) (layer F.Fab)
+  (gr_text "NOTES:\n1. FOOTPRINTS ORIENTED PER IPC-7351FC LEVEL B (PIN 1 IN LOWER LEFT)\n2. COMPONENT ROTATION IN DEGREES COUNTER-CLOCKWISE\n3. ALL COMPONENTS BESIDES FSR MOUNTED ON B.CU LAYER (LED IS BOTTOM-MOUNT)\n4. PCB IS 1.6mm FR4 RATED FOR ROHS REFLOW, 1OZ COPPER, ENIG FINISH\n5. MATTE BLACK SOLDER MASK WITH WHITE SILKSCREEN\n6. SOLDER PASTE MUST BE ROHS COMPLIANT (LEAD-FREE)\n7. NO MARKS (E-TEST, QA, SERIAL NUMBER, ETC) ON FRONT (LOGO SIDE) OF BOARD\n8. BOARDS TO BE SHIPPED IN CUSTOMER-SUPPLIED FOAM TRAYS\n9. 3MM LED HOLE IS PLATED\n10. FORCE SENSITIVE RESISTOR ADHERED TO BOARD FRONT USING BUILT IN STICKY PAD\n11. FORCE SENSITIVE RESISTOR MUST BE HAND SOLDERED" (at 73.75 138.25) (layer F.Fab)
     (effects (font (size 1.5 1.5) (thickness 0.3)) (justify left))
   )
   (gr_text B (at 139.6 86.4) (layer F.Mask)

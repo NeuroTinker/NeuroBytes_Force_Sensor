@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.7-e1-6374~58~ubuntu14.04.1)
+(kicad_pcb (version 4) (host pcbnew 4.0.7-e2-6376~58~ubuntu14.04.1)
 
   (general
     (links 75)
     (no_connects 0)
-    (area 46.899999 59.8 189.100001 140.375)
+    (area 46.899999 59.8 189.100001 153.625)
     (thickness 1.6)
     (drawings 46)
     (tracks 211)
@@ -12,13 +12,15 @@
     (nets 39)
   )
 
-  (page B)
+  (page A)
   (title_block
     (title "NeuroBytes Force Sensor")
     (date 2017-10-03)
     (rev C)
     (company "NeuroTinker, LLC")
-    (comment 1 "License: GPL v3")
+    (comment 1 "(C) 2017 Zach Fredin")
+    (comment 2 "Drawing No. ZF-11782")
+    (comment 3 "License: CC-BY-SA 4.0")
   )
 
   (layers
@@ -98,7 +100,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory ../../../NeuroTinker_RFQ_Sept2017/NeuroBytes_Force_Sensor/))
+      (outputdirectory /home/zach/Desktop/))
   )
 
   (net 0 "")
