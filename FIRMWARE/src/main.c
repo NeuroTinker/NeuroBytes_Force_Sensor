@@ -11,7 +11,7 @@
 #include "comm.h"
 #include "neuron.h"
 
-//#define DBG
+// #define DBG
 
 #define BLINK_TIME			40
 #define DATA_TIME			10
@@ -130,10 +130,9 @@ int main(void)
 			while (!(adc_eoc(ADC1)));
 			sense_input = adc_read_regular(ADC1);
 			sense_10_bit = scale10bit(sense_input, zero, span);
-			adaptation_rate = 0;
 			current_sense = sense_10_bit - adaptive_zero;
 
-			adapt_time = 0; // debug
+			//adapt_time = 0; // debug
 			if (++adapt_time == ADAPT_TIME){
 				adapt_time = 0;
 				if (adaptation_rate != 0){
@@ -228,7 +227,8 @@ int main(void)
 						adaptation_rate = 0;
 						adaptive_zero = 0;
 					} else{
-						adaptation_rate = 10;
+						//adaptation_rate = 1;
+						adaptation_rate = 0;
 					}
 					button_armed = 0;
 				}
@@ -257,7 +257,7 @@ int main(void)
 				}
 			}
 
-			neuron.leaky_current = sense_10_bit * 9 / 10;
+			neuron.leaky_current = current_sense * 9 / 10;
 			membraneDecayStep(&neuron);
 			neuron.potential = 0;
 			neuron.potential += neuron.fire_potential;
