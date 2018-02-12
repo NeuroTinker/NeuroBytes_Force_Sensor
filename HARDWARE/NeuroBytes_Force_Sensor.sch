@@ -104,8 +104,6 @@ Text GLabel 2600 2850 0    60   Input ~ 0
 A1IN
 Text GLabel 2600 3000 0    60   Input ~ 0
 A1EX
-Wire Wire Line
-	5200 2700 5400 2700
 $Comp
 L LED_RABG D1
 U 1 1 58B4B5D1
@@ -482,7 +480,7 @@ Text GLabel 4700 5400 2    60   Input ~ 0
 IDENTIFY
 Wire Wire Line
 	4700 5400 4500 5400
-Text GLabel 5400 2700 2    60   Input ~ 0
+Text GLabel 5550 4600 2    60   Input ~ 0
 IDENTIFY
 $Comp
 L GND #PWR014
@@ -517,7 +515,7 @@ Wire Wire Line
 	1800 2650 1800 2450
 Wire Wire Line
 	1800 2150 1800 1950
-Text GLabel 2600 2700 0    60   Input ~ 0
+Text GLabel 2500 4200 0    60   Input ~ 0
 SENSE
 $Comp
 L R R4
@@ -647,7 +645,7 @@ F 7 "https://www.digikey.com/product-detail/en/interlink-electronics/34-00015/10
 F 8 "No" H 1550 8050 60  0001 C CNN "Subs Allowed"
 F 9 "Yes" H 1550 8050 60  0001 C CNN "RoHS"
 	1    1550 8050
-	1    0    0    -1  
+	-1   0    0    1   
 $EndComp
 Wire Wire Line
 	1550 7900 1550 7500
@@ -657,8 +655,6 @@ Wire Wire Line
 	2600 2550 2800 2550
 Wire Wire Line
 	2600 2400 2800 2400
-Wire Wire Line
-	2600 2700 2800 2700
 Wire Wire Line
 	2600 2850 2800 2850
 Wire Wire Line
@@ -940,4 +936,61 @@ Text Notes 13650 3400 0    60   ~ 0
 AXON TERMINAL
 Text Notes 10450 3850 0    60   ~ 0
 LED
+$Comp
+L RClamp0503F U3
+U 1 1 5A81F7FE
+P 3950 4400
+F 0 "U3" H 3950 4000 60  0000 C CNN
+F 1 "RClamp0503F" H 3950 4800 60  0000 C CNN
+F 2 "KiCad_Footprints:ZF_SMD_SOT-353" H 4100 4250 60  0001 C CNN
+F 3 "" H 4100 4250 60  0001 C CNN
+F 4 "No" H 3950 4400 60  0001 C CNN "Subs Allowed"
+F 5 "Yes" H 3950 4400 60  0001 C CNN "RoHS"
+	1    3950 4400
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5350 2700 5350 4600
+Wire Wire Line
+	5350 2700 5200 2700
+$Comp
+L GND #PWR020
+U 1 1 5A81FD69
+P 4700 4950
+F 0 "#PWR020" H 4700 4700 50  0001 C CNN
+F 1 "GND" H 4700 4800 50  0000 C CNN
+F 2 "" H 4700 4950 50  0001 C CNN
+F 3 "" H 4700 4950 50  0001 C CNN
+	1    4700 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4700 4950 4700 4400
+Wire Wire Line
+	4700 4400 4400 4400
+$Comp
+L +3.3V #PWR021
+U 1 1 5A81FE70
+P 3350 3950
+F 0 "#PWR021" H 3350 3800 50  0001 C CNN
+F 1 "+3.3V" H 3350 4090 50  0000 C CNN
+F 2 "" H 3350 3950 50  0001 C CNN
+F 3 "" H 3350 3950 50  0001 C CNN
+	1    3350 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3350 3950 3350 4600
+Wire Wire Line
+	3350 4600 3500 4600
+Wire Wire Line
+	2700 2700 2700 4200
+Wire Wire Line
+	2500 4200 3500 4200
+Wire Wire Line
+	2800 2700 2700 2700
+Connection ~ 2700 4200
+Wire Wire Line
+	4400 4600 5550 4600
+Connection ~ 5350 4600
 $EndSCHEMATC
