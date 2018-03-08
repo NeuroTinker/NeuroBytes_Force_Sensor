@@ -480,7 +480,7 @@ Text GLabel 4700 5400 2    60   Input ~ 0
 IDENTIFY
 Wire Wire Line
 	4700 5400 4500 5400
-Text GLabel 5550 4200 2    60   Input ~ 0
+Text GLabel 5550 4600 2    60   Input ~ 0
 IDENTIFY
 $Comp
 L GND #PWR014
@@ -950,10 +950,7 @@ F 5 "Yes" H 3950 4400 60  0001 C CNN "RoHS"
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	5550 4200 4400 4200
-Wire Wire Line
-	5350 4200 5350 2700
-Connection ~ 5350 4200
+	5350 2700 5350 4600
 Wire Wire Line
 	5350 2700 5200 2700
 $Comp
@@ -993,4 +990,7 @@ Wire Wire Line
 Wire Wire Line
 	2800 2700 2700 2700
 Connection ~ 2700 4200
+Wire Wire Line
+	4400 4600 5550 4600
+Connection ~ 5350 4600
 $EndSCHEMATC
