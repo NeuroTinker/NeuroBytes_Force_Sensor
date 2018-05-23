@@ -1,29 +1,31 @@
-### Module positions - created on Wed May 23 14:22:41 2018 ###
+### Module positions - created on Wed May 23 18:08:15 2018 ###
 ### Printed by Pcbnew version kicad 4.0.7-e2-6376~58~ubuntu14.04.1
 ## Unit = mm, Angle = deg.
 ## Side : All
-# Ref     Val           Package                       	PosX       PosY       Rot  	Side
-C1        1u            C0603        			101.5000   -75.0000  270.0000  bottom
-C2        10u           C1206        			113.2000   -87.0000    0.0000  bottom
-C3        0u1           C0402    			113.2000   -85.4000    0.0000  bottom
-C4        1u            C0603        			104.0000   -78.0000    0.0000  bottom
-C5        0u1           C0402    			100.5000   -82.9000  270.0000  bottom
-P1        JST_GH_5-pos  JST_GH_5POS        		 95.0000   -81.0000  180.0000  bottom
-P6        CONN_01X04    JST_GH_4POS            		139.7500   -76.5000   45.0000  bottom
-P7        CONN_01X04    JST_GH_4POS            		139.7500   -85.5000  315.0000  bottom
-Q1        MMBT3904      SOT23-3L               		120.0000   -74.0000  270.0000  bottom
-Q2        MMBT3904      SOT23-3L               		122.5000   -77.5000  270.0000  bottom
-Q3        MMBT3904      SOT23-3L               		127.5000   -84.5000  270.0000  bottom
-R1        150           R0402        			124.1000   -72.8000  180.0000  bottom
-R2        100           R0402        			128.2000   -80.0000  180.0000  bottom
-R3        100           R0402        			131.6000   -80.0000  180.0000  bottom
-R4        JMP           R0402        			113.2000   -76.6000  180.0000  bottom
-R5        1k            R0402        			116.5000   -75.0000  180.0000  bottom
-R6        1k            R0402        			116.5000   -74.0000  180.0000  bottom
-R7        1k            R0402        			116.5000   -76.0000  180.0000  bottom
-R8        10k           R0402        			119.4000   -81.0000   90.0000  bottom
-SW1       SW_PUSH       SMT   				131.7500   -88.7000  180.0000  bottom
-U1        STM32L011Gx   UFQFPN28-050        		113.2000   -81.0000    0.0000  bottom
-U2        3v3 LDO       SOT23-5L               		104.0000   -75.0000    0.0000  bottom
-R9        R_Variable    SMT    				100.0000   -81.0000   90.0000  top
+# Ref     Val           Package                      	PosX       PosY       Rot     Side
+C1        1u            C0603                       	101.5000   -75.0000  270.0000  bottom
+C2        10u           C1206                       	113.2000   -87.0000    0.0000  bottom
+C3        0u1           C0402                 		113.2000   -85.4000    0.0000  bottom
+C4        1u            C0603                       	104.0000   -78.0000    0.0000  bottom
+C5        0u1           C0402                   	100.5000   -82.9000  270.0000  bottom
+D1        LED_RABG      4-SMT   			129.8750   -76.4000    0.0000  bottom
+P1        JST_GH_5-pos  JST_GH_5POS                      95.0000   -81.0000  180.0000  bottom
+P6        CONN_01X04    JST_GH_4POS                     139.7500   -76.5000   45.0000  bottom
+P7        CONN_01X04    JST_GH_4POS                     139.7500   -85.5000  315.0000  bottom
+Q1        MMBT3904      SOT23-3L                        120.0000   -74.0000  270.0000  bottom
+Q2        MMBT3904      SOT23-3L                        122.5000   -77.5000  270.0000  bottom
+Q3        MMBT3904      SOT23-3L                        127.5000   -84.5000  270.0000  bottom
+R1        150           R0402                       	124.1000   -72.8000  180.0000  bottom
+R2        100           R0402                       	128.2000   -80.0000  180.0000  bottom
+R3        100           R0402                       	131.6000   -80.0000  180.0000  bottom
+R4        JMP           R0402                       	113.2000   -76.6000  180.0000  bottom
+R5        1k            R0402                       	116.5000   -75.0000  180.0000  bottom
+R6        1k            R0402                       	116.5000   -74.0000  180.0000  bottom
+R7        1k            R0402                       	116.5000   -76.0000  180.0000  bottom
+R8        10k           R0402                       	119.4000   -81.0000   90.0000  bottom
+SW1       SW_PUSH       4-SMT                  		131.7500   -88.7000  180.0000  bottom
+U1        STM32L011Gx   UFQFPN28-050                    113.2000   -81.0000    0.0000  bottom
+U2        3v3 LDO       SOT23-5L                        104.0000   -75.0000    0.0000  bottom
+U3        RClamp0503F   SOT-353                         125.0000   -81.0000  270.0000  bottom
+R9        R_Variable    2-SMT                   	100.0000   -81.0000   90.0000  top
 ## End

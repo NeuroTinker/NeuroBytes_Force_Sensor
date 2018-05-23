@@ -663,6 +663,7 @@
   (module KiCad_Footprints:ZF_LED_RGB_SunLED_XZMDKCBDDG45S-9_cast (layer B.Cu) (tedit 58B5B64A) (tstamp 58D19F10)
     (at 129.875 76.4)
     (path /58B4B5D1)
+    (attr smd)
     (fp_text reference D1 (at 0 -2.3 180) (layer Cmts.User)
       (effects (font (size 1 1) (thickness 0.15)))
     )
@@ -1253,6 +1254,7 @@
   (module KiCad_Footprints:ZF_SMD_SOT-353 (layer B.Cu) (tedit 59011580) (tstamp 5A8203DD)
     (at 125 81 270)
     (path /5A81F7FE)
+    (attr smd)
     (fp_text reference U3 (at 0 -7.3 270) (layer B.SilkS) hide
       (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
     )
