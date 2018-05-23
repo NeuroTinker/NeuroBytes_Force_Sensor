@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:NeuroBytes_Force_Sensor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,7 +30,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:NeuroTinker_schematic_symbols
-LIBS:NeuroBytes_Force_Sensor-cache
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
@@ -149,7 +149,7 @@ F 3 "" H 11800 2200 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X04 P6
+L Conn_01x04 P6
 U 1 1 58B5B32F
 P 14400 1900
 F 0 "P6" H 14400 2150 50  0000 C CNN
@@ -668,7 +668,7 @@ Wire Wire Line
 Wire Wire Line
 	9900 6050 9900 5150
 $Comp
-L CONN_01X05 P1
+L Conn_01x05 P1
 U 1 1 598E106F
 P 10550 5850
 F 0 "P1" H 10550 6150 50  0000 C CNN
@@ -753,7 +753,7 @@ F 9 "Yes" H 12800 6200 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X04 P7
+L Conn_01x04 P7
 U 1 1 59C5B780
 P 14400 2450
 F 0 "P7" H 14400 2700 50  0000 C CNN
@@ -944,8 +944,12 @@ F 0 "U3" H 3950 4000 60  0000 C CNN
 F 1 "RClamp0503F" H 3950 4800 60  0000 C CNN
 F 2 "KiCad_Footprints:ZF_SMD_SOT-353" H 4100 4250 60  0001 C CNN
 F 3 "" H 4100 4250 60  0001 C CNN
-F 4 "No" H 3950 4400 60  0001 C CNN "Subs Allowed"
-F 5 "Yes" H 3950 4400 60  0001 C CNN "RoHS"
+F 4 "Semtec Corporation" H 3950 4400 60  0001 C CNN "Mfr"
+F 5 "RCLAMP0503F.TCT" H 3950 4400 60  0001 C CNN "Mfr Part #"
+F 6 "5-TSSOP" H 3950 4400 60  0001 C CNN "Package"
+F 7 "https://www.digikey.com/product-detail/en/semtech-corporation/RCLAMP0503F.TCT/RCLAMP0503F.TCTTR-ND/5113629" H 3950 4400 60  0001 C CNN "Link"
+F 8 "No" H 3950 4400 60  0001 C CNN "Subs Allowed"
+F 9 "Yes" H 3950 4400 60  0001 C CNN "RoHS"
 	1    3950 4400
 	-1   0    0    1   
 $EndComp

@@ -3,7 +3,7 @@
   (general
     (links 79)
     (no_connects 0)
-    (area 90.449999 71.449999 144.550001 90.550001)
+    (area 46.899999 59.8 189.100001 153.625)
     (thickness 1.6)
     (drawings 47)
     (tracks 287)
@@ -100,7 +100,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory /home/zach/Desktop/))
+      (outputdirectory Gerbers))
   )
 
   (net 0 "")
