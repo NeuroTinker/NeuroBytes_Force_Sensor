@@ -30,6 +30,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:NeuroTinker_schematic_symbols
+LIBS:NeuroBytes_Force_Sensor-cache
 EELAYER 25 0
 EELAYER END
 $Descr B 17000 11000
@@ -209,7 +210,7 @@ F 9 "Yes" H 4000 2400 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L LD3985G33R U2
+L TLV71333PDBV U2
 U 1 1 58B5C9D0
 P 13650 6000
 F 0 "U2" H 13400 6200 50  0000 C CNN
@@ -226,14 +227,7 @@ F 9 "Yes" H 13650 6000 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	12500 5950 13200 5950
-Wire Wire Line
-	13000 5950 13000 6100
-Wire Wire Line
-	13000 6100 13200 6100
-Wire Wire Line
-	12800 6050 12800 5950
-Connection ~ 13000 5950
+	12800 5900 12800 6050
 Wire Wire Line
 	12800 6350 12800 6550
 Wire Wire Line
@@ -251,7 +245,6 @@ F 3 "" H 12500 5750 50  0000 C CNN
 	1    12500 5750
 	1    0    0    -1  
 $EndComp
-Connection ~ 12800 5950
 $Comp
 L +5V #PWR05
 U 1 1 58B5CECC
@@ -306,7 +299,7 @@ F 9 "Yes" H 14450 6200 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	14450 5950 14450 6050
+	14450 5900 14450 6050
 Wire Wire Line
 	14450 6350 14450 6450
 Wire Wire Line
@@ -323,7 +316,6 @@ F 3 "" H 14700 5750 50  0000 C CNN
 	1    14700 5750
 	1    0    0    -1  
 $EndComp
-Connection ~ 14450 5950
 $Comp
 L +3.3V #PWR09
 U 1 1 58B5D4CD
@@ -357,12 +349,6 @@ F 3 "" H 6200 1050 50  0000 C CNN
 	1    6200 1050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	14100 5950 14700 5950
-Wire Wire Line
-	14700 5950 14700 5750
-Wire Wire Line
-	12500 5950 12500 5750
 Wire Wire Line
 	1750 5700 1450 5700
 Wire Wire Line
@@ -997,4 +983,19 @@ Connection ~ 2700 4200
 Wire Wire Line
 	4400 4600 5550 4600
 Connection ~ 5350 4600
+Wire Wire Line
+	13950 5900 14700 5900
+Wire Wire Line
+	14700 5900 14700 5750
+Connection ~ 14450 5900
+Wire Wire Line
+	13350 5900 12500 5900
+Wire Wire Line
+	12500 5900 12500 5750
+Connection ~ 12800 5900
+Wire Wire Line
+	13350 6000 13150 6000
+Wire Wire Line
+	13150 6000 13150 5900
+Connection ~ 13150 5900
 $EndSCHEMATC
