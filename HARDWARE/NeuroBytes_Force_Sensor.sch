@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:NeuroBytes_Force_Sensor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -36,11 +37,11 @@ $Descr B 17000 11000
 encoding utf-8
 Sheet 1 1
 Title "NeuroBytes Force Sensor"
-Date "2017-10-03"
-Rev "C"
+Date "2018-02-12"
+Rev "D"
 Comp "NeuroTinker, LLC"
-Comment1 "License: GPL v3"
-Comment2 ""
+Comment1 "(C) 2018 Zach Fredin"
+Comment2 "License: CC-BY-SA 4.0"
 Comment3 ""
 Comment4 ""
 $EndDescr
@@ -104,8 +105,6 @@ Text GLabel 2600 2850 0    60   Input ~ 0
 A1IN
 Text GLabel 2600 3000 0    60   Input ~ 0
 A1EX
-Wire Wire Line
-	5200 2700 5400 2700
 $Comp
 L LED_RABG D1
 U 1 1 58B4B5D1
@@ -151,20 +150,20 @@ F 3 "" H 11800 2200 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X04 P6
+L Conn_01x04 P6
 U 1 1 58B5B32F
-P 14400 1900
-F 0 "P6" H 14400 2150 50  0000 C CNN
-F 1 "CONN_01X04" V 14500 1900 50  0000 C CNN
-F 2 "KiCad_Footprints:ZF_CONN_JST_GH" H 14400 2250 50  0000 C CNN
-F 3 "" H 14400 1900 50  0000 C CNN
-F 4 "JST" H 14400 1900 60  0001 C CNN "Mfr"
-F 5 "SM04B-GHS-TB(LF)(SN)" H 14400 1900 60  0001 C CNN "Mfr Part #"
-F 6 "SMT" H 14400 1900 60  0001 C CNN "Package"
-F 7 "https://www.digikey.com/product-detail/en/jst-sales-america-inc/SM04B-GHS-TB-LF-SN/455-1566-2-ND/807788" H 14400 1900 60  0001 C CNN "Link"
-F 8 "No" H 14400 1900 60  0001 C CNN "Subs Allowed"
-F 9 "Yes" H 14400 1900 60  0001 C CNN "RoHS"
-	1    14400 1900
+P 14400 1850
+F 0 "P6" H 14400 2100 50  0000 C CNN
+F 1 "CONN_01X04" V 14500 1850 50  0000 C CNN
+F 2 "KiCad_Footprints:ZF_CONN_JST_GH" H 14400 2200 50  0000 C CNN
+F 3 "" H 14400 1850 50  0000 C CNN
+F 4 "JST" H 14400 1850 60  0001 C CNN "Mfr"
+F 5 "SM04B-GHS-TB(LF)(SN)" H 14400 1850 60  0001 C CNN "Mfr Part #"
+F 6 "SMT" H 14400 1850 60  0001 C CNN "Package"
+F 7 "https://www.digikey.com/product-detail/en/jst-sales-america-inc/SM04B-GHS-TB-LF-SN/455-1566-2-ND/807788" H 14400 1850 60  0001 C CNN "Link"
+F 8 "No" H 14400 1850 60  0001 C CNN "Subs Allowed"
+F 9 "Yes" H 14400 1850 60  0001 C CNN "RoHS"
+	1    14400 1850
 	1    0    0    -1  
 $EndComp
 Text GLabel 13100 2050 0    60   Input ~ 0
@@ -211,7 +210,7 @@ F 9 "Yes" H 4000 2400 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L LD3985G33R U2
+L TLV71333PDBV U2
 U 1 1 58B5C9D0
 P 13650 6000
 F 0 "U2" H 13400 6200 50  0000 C CNN
@@ -228,14 +227,7 @@ F 9 "Yes" H 13650 6000 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	12500 5950 13200 5950
-Wire Wire Line
-	13000 5950 13000 6100
-Wire Wire Line
-	13000 6100 13200 6100
-Wire Wire Line
-	12800 6050 12800 5950
-Connection ~ 13000 5950
+	12800 5900 12800 6050
 Wire Wire Line
 	12800 6350 12800 6550
 Wire Wire Line
@@ -253,7 +245,6 @@ F 3 "" H 12500 5750 50  0000 C CNN
 	1    12500 5750
 	1    0    0    -1  
 $EndComp
-Connection ~ 12800 5950
 $Comp
 L +5V #PWR05
 U 1 1 58B5CECC
@@ -296,7 +287,7 @@ U 1 1 58B5D1F9
 P 14450 6200
 F 0 "C4" H 14475 6300 50  0000 L CNN
 F 1 "1u" H 14475 6100 50  0000 L CNN
-F 2 "KiCad_Footprints:ZF_SMD_NonPol_0603" H 14488 6050 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 14488 6050 50  0001 C CNN
 F 3 "" H 14450 6200 50  0000 C CNN
 F 4 "Taiyo Yuden" H 14450 6200 60  0001 C CNN "Mfr"
 F 5 "LMK107B7105KA-T" H 14450 6200 60  0001 C CNN "Mfr Part #"
@@ -308,7 +299,7 @@ F 9 "Yes" H 14450 6200 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	14450 5950 14450 6050
+	14450 5900 14450 6050
 Wire Wire Line
 	14450 6350 14450 6450
 Wire Wire Line
@@ -325,7 +316,6 @@ F 3 "" H 14700 5750 50  0000 C CNN
 	1    14700 5750
 	1    0    0    -1  
 $EndComp
-Connection ~ 14450 5950
 $Comp
 L +3.3V #PWR09
 U 1 1 58B5D4CD
@@ -359,12 +349,6 @@ F 3 "" H 6200 1050 50  0000 C CNN
 	1    6200 1050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	14100 5950 14700 5950
-Wire Wire Line
-	14700 5950 14700 5750
-Wire Wire Line
-	12500 5950 12500 5750
 Wire Wire Line
 	1750 5700 1450 5700
 Wire Wire Line
@@ -482,7 +466,7 @@ Text GLabel 4700 5400 2    60   Input ~ 0
 IDENTIFY
 Wire Wire Line
 	4700 5400 4500 5400
-Text GLabel 5400 2700 2    60   Input ~ 0
+Text GLabel 5550 4600 2    60   Input ~ 0
 IDENTIFY
 $Comp
 L GND #PWR014
@@ -517,7 +501,7 @@ Wire Wire Line
 	1800 2650 1800 2450
 Wire Wire Line
 	1800 2150 1800 1950
-Text GLabel 2600 2700 0    60   Input ~ 0
+Text GLabel 2500 4200 0    60   Input ~ 0
 SENSE
 $Comp
 L R R4
@@ -647,7 +631,7 @@ F 7 "https://www.digikey.com/product-detail/en/interlink-electronics/34-00015/10
 F 8 "No" H 1550 8050 60  0001 C CNN "Subs Allowed"
 F 9 "Yes" H 1550 8050 60  0001 C CNN "RoHS"
 	1    1550 8050
-	1    0    0    -1  
+	-1   0    0    1   
 $EndComp
 Wire Wire Line
 	1550 7900 1550 7500
@@ -657,8 +641,6 @@ Wire Wire Line
 	2600 2550 2800 2550
 Wire Wire Line
 	2600 2400 2800 2400
-Wire Wire Line
-	2600 2700 2800 2700
 Wire Wire Line
 	2600 2850 2800 2850
 Wire Wire Line
@@ -672,7 +654,7 @@ Wire Wire Line
 Wire Wire Line
 	9900 6050 9900 5150
 $Comp
-L CONN_01X05 P1
+L Conn_01x05 P1
 U 1 1 598E106F
 P 10550 5850
 F 0 "P1" H 10550 6150 50  0000 C CNN
@@ -745,7 +727,7 @@ U 1 1 59C5B541
 P 12800 6200
 F 0 "C1" H 12825 6300 50  0000 L CNN
 F 1 "1u" H 12825 6100 50  0000 L CNN
-F 2 "KiCad_Footprints:ZF_SMD_NonPol_0603" H 12838 6050 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0603_HandSoldering" H 12838 6050 50  0001 C CNN
 F 3 "" H 12800 6200 50  0000 C CNN
 F 4 "Taiyo Yuden" H 12800 6200 60  0001 C CNN "Mfr"
 F 5 "LMK107B7105KA-T" H 12800 6200 60  0001 C CNN "Mfr Part #"
@@ -757,20 +739,20 @@ F 9 "Yes" H 12800 6200 60  0001 C CNN "RoHS"
 	1    0    0    -1  
 $EndComp
 $Comp
-L CONN_01X04 P7
+L Conn_01x04 P7
 U 1 1 59C5B780
-P 14400 2450
-F 0 "P7" H 14400 2700 50  0000 C CNN
-F 1 "CONN_01X04" V 14500 2450 50  0000 C CNN
-F 2 "KiCad_Footprints:ZF_CONN_JST_GH" H 14400 2800 50  0000 C CNN
-F 3 "" H 14400 2450 50  0000 C CNN
-F 4 "JST" H 14400 2450 60  0001 C CNN "Mfr"
-F 5 "SM04B-GHS-TB(LF)(SN)" H 14400 2450 60  0001 C CNN "Mfr Part #"
-F 6 "SMT" H 14400 2450 60  0001 C CNN "Package"
-F 7 "https://www.digikey.com/product-detail/en/jst-sales-america-inc/SM04B-GHS-TB-LF-SN/455-1566-2-ND/807788" H 14400 2450 60  0001 C CNN "Link"
-F 8 "No" H 14400 2450 60  0001 C CNN "Subs Allowed"
-F 9 "Yes" H 14400 2450 60  0001 C CNN "RoHS"
-	1    14400 2450
+P 14400 2400
+F 0 "P7" H 14400 2650 50  0000 C CNN
+F 1 "CONN_01X04" V 14500 2400 50  0000 C CNN
+F 2 "KiCad_Footprints:ZF_CONN_JST_GH" H 14400 2750 50  0000 C CNN
+F 3 "" H 14400 2400 50  0000 C CNN
+F 4 "JST" H 14400 2400 60  0001 C CNN "Mfr"
+F 5 "SM04B-GHS-TB(LF)(SN)" H 14400 2400 60  0001 C CNN "Mfr Part #"
+F 6 "SMT" H 14400 2400 60  0001 C CNN "Package"
+F 7 "https://www.digikey.com/product-detail/en/jst-sales-america-inc/SM04B-GHS-TB-LF-SN/455-1566-2-ND/807788" H 14400 2400 60  0001 C CNN "Link"
+F 8 "No" H 14400 2400 60  0001 C CNN "Subs Allowed"
+F 9 "Yes" H 14400 2400 60  0001 C CNN "RoHS"
+	1    14400 2400
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -940,4 +922,80 @@ Text Notes 13650 3400 0    60   ~ 0
 AXON TERMINAL
 Text Notes 10450 3850 0    60   ~ 0
 LED
+$Comp
+L RClamp0503F U3
+U 1 1 5A81F7FE
+P 3950 4400
+F 0 "U3" H 3950 4000 60  0000 C CNN
+F 1 "RClamp0503F" H 3950 4800 60  0000 C CNN
+F 2 "KiCad_Footprints:ZF_SMD_SOT-353" H 4100 4250 60  0001 C CNN
+F 3 "" H 4100 4250 60  0001 C CNN
+F 4 "Semtec Corporation" H 3950 4400 60  0001 C CNN "Mfr"
+F 5 "RCLAMP0503F.TCT" H 3950 4400 60  0001 C CNN "Mfr Part #"
+F 6 "5-TSSOP" H 3950 4400 60  0001 C CNN "Package"
+F 7 "https://www.digikey.com/product-detail/en/semtech-corporation/RCLAMP0503F.TCT/RCLAMP0503F.TCTTR-ND/5113629" H 3950 4400 60  0001 C CNN "Link"
+F 8 "No" H 3950 4400 60  0001 C CNN "Subs Allowed"
+F 9 "Yes" H 3950 4400 60  0001 C CNN "RoHS"
+	1    3950 4400
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5350 2700 5350 4600
+Wire Wire Line
+	5350 2700 5200 2700
+$Comp
+L GND #PWR020
+U 1 1 5A81FD69
+P 4700 4950
+F 0 "#PWR020" H 4700 4700 50  0001 C CNN
+F 1 "GND" H 4700 4800 50  0000 C CNN
+F 2 "" H 4700 4950 50  0001 C CNN
+F 3 "" H 4700 4950 50  0001 C CNN
+	1    4700 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4700 4950 4700 4400
+Wire Wire Line
+	4700 4400 4400 4400
+$Comp
+L +3.3V #PWR021
+U 1 1 5A81FE70
+P 3350 3950
+F 0 "#PWR021" H 3350 3800 50  0001 C CNN
+F 1 "+3.3V" H 3350 4090 50  0000 C CNN
+F 2 "" H 3350 3950 50  0001 C CNN
+F 3 "" H 3350 3950 50  0001 C CNN
+	1    3350 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3350 3950 3350 4600
+Wire Wire Line
+	3350 4600 3500 4600
+Wire Wire Line
+	2700 2700 2700 4200
+Wire Wire Line
+	2500 4200 3500 4200
+Wire Wire Line
+	2800 2700 2700 2700
+Connection ~ 2700 4200
+Wire Wire Line
+	4400 4600 5550 4600
+Connection ~ 5350 4600
+Wire Wire Line
+	13950 5900 14700 5900
+Wire Wire Line
+	14700 5900 14700 5750
+Connection ~ 14450 5900
+Wire Wire Line
+	13350 5900 12500 5900
+Wire Wire Line
+	12500 5900 12500 5750
+Connection ~ 12800 5900
+Wire Wire Line
+	13350 6000 13150 6000
+Wire Wire Line
+	13150 6000 13150 5900
+Connection ~ 13150 5900
 $EndSCHEMATC
