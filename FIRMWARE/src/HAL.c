@@ -49,7 +49,7 @@ volatile uint8_t dendrite_pulse_flag[];
 volatile uint8_t dendrite_ping_flag[];
 
 static uint32_t fingerprint[3] __attribute__((section (".fingerprint"))) __attribute__ ((__used__)) = {
-	7, // device id
+	6, // device id
 	1, // firmware version
 	0  // unique id
 };
